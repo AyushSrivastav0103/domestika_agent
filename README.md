@@ -24,4 +24,3 @@ Built with Streamlit and Groq’s blazing-fast LLaMA-3 models.
 ### 1. Clone this repo
 ```bash
 git clone https://github.com/AyushSrivastav0103/domestika_agent.git
-cd domestika-assistant
