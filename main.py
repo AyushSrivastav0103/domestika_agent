@@ -43,24 +43,12 @@ def chat_completion(prompt: str) -> str | None:
 def recommend_next_project(skill: str):
     prompt = (
         f"You’re an expert creative coach. A learner who knows '{skill}' "
-        "needs a 5-step micro-project path. List them clearly."
+        "needs a micro-project path. List them clearly."
     )
     text = chat_completion(prompt)
     if not text:
-        return [
-            "Basic strokes practice",
-            "Letterforms drill",
-            "Phrase composition",
-            "Creative poster",
-            "Peer feedback session"
-        ]
-
-    projects = []
-    for line in text.splitlines():
-        cleaned = line.strip().lstrip("0123456789.- ").strip()
-        if cleaned:
-            projects.append(cleaned)
-    return projects[:5]
+        return "1. Basic strokes practice\n2. Letterforms drill\n3. Phrase composition\n4. Creative poster\n5. Peer feedback session"
+    return text
 
 def analyze_design():
     prompt = (
@@ -99,9 +87,8 @@ if flow == "Onboarding":
     if st.button("Start"):
         with st.spinner("Generating your personalized path..."):
             projects = recommend_next_project(skill)
-        st.success("Here’s your 5‑step micro‑project path:")
-        for i, p in enumerate(projects, 1):
-            st.write(f"{i}. {p}")
+        st.success("Here’s your micro‑project path:")
+        st.markdown(projects)
 
 else:
     st.title("Creative Assistant: Feedback")
