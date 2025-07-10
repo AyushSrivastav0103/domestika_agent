@@ -57,17 +57,12 @@ def analyze_design():
     )
     text = chat_completion(prompt)
     if not text:
-        return [
-            "Increase heading font size for emphasis",
-            "Try a complementary color palette",
-            "Align elements to a consistent grid"
-        ]
-    tips = []
-    for line in text.splitlines():
-        cleaned = line.strip().lstrip("-0123456789. ").strip()
-        if cleaned:
-            tips.append(cleaned)
-    return tips[:3]
+        return (
+            "1. Increase heading font size for emphasis\n"
+            "2. Try a complementary color palette\n"
+            "3. Align elements to a consistent grid"
+        )
+    return text
 
 # ─── Streamlit UI ───────────────────────────────────────────────────────────────
 
@@ -101,5 +96,4 @@ else:
             with st.spinner("Analyzing your design..."):
                 tips = analyze_design()
             st.success("Here are some actionable tips:")
-            for tip in tips:
-                st.write(f"• {tip}")
+            st.markdown(tips)
